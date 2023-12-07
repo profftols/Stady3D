@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class UnitWorker : MonoBehaviour
 {
+    public bool IsWork { get; private set; }
+    
     [SerializeField] private Builder _builder;
     
-    public bool IsWork { get; private set; }
     private Citadel _citadel;
     private Vector3 _pathBuild;
     private Mover _mover;
