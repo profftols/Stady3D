@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class Shipper : MonoBehaviour
 {
-    public bool IsCargoFull { get; private set; }
     private UnitWorker _unit;
+    public bool IsCargoFull { get; private set; }
+    
+    private void Start()
+    {
+        _unit = GetComponentInParent<UnitWorker>();
+    }
     
     private void OnTriggerEnter(Collider other)
     {
@@ -24,8 +29,4 @@ public class Shipper : MonoBehaviour
         IsCargoFull = false;
     }
 
-    private void Start()
-    {
-        _unit = GetComponentInParent<UnitWorker>();
-    }
 }

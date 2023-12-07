@@ -1,9 +1,17 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Citadel))]
+[RequireComponent(typeof(MoneyManager))]
 public class Builder : MonoBehaviour
 {
         private Citadel _citadel;
         private MoneyManager _money;
+        
+        private void Start()
+        {
+            _citadel = GetComponent<Citadel>();
+            _money = GetComponent<MoneyManager>();
+        }
         
         public UnitWorker CreateUnit(Vector3 position, UnitWorker unit)
         {
@@ -25,9 +33,4 @@ public class Builder : MonoBehaviour
             return citadel;
         }
     
-        private void Start()
-        {
-            _citadel = GetComponent<Citadel>();
-            _money = GetComponent<MoneyManager>();
-        }
 }

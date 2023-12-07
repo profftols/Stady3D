@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(UnitWorker))]
 public class Mover : MonoBehaviour
 {
     [SerializeField] private float _speedMove;
@@ -12,24 +13,6 @@ public class Mover : MonoBehaviour
     private Vector3 _pathBuild;
     private bool _isCollect;
     private bool _isBuild;
-
-    public bool TrySetCoordinateResource(Vector3 target)
-    {
-        _target = target;
-       return _isCollect = true;
-    }
-
-    public bool TrySetCoordinateBuild(Vector3 target)
-    {
-        _pathBuild = target;
-        return _isBuild = true;
-    }
-
-    public bool SetNewPosition(Vector3 position)
-    {
-        _startPosition = position;
-        return _isCollect;
-    }
 
     private void Start()
     {
@@ -63,6 +46,24 @@ public class Mover : MonoBehaviour
         {
             GoBuild();
         }
+    }
+    
+    public bool TrySetCoordinateResource(Vector3 target)
+    {
+        _target = target;
+       return _isCollect = true;
+    }
+
+    public bool TrySetCoordinateBuild(Vector3 target)
+    {
+        _pathBuild = target;
+        return _isBuild = true;
+    }
+
+    public bool SetNewPosition(Vector3 position)
+    {
+        _startPosition = position;
+        return _isCollect;
     }
 
     private void GoBuild()

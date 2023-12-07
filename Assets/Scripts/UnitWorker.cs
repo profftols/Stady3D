@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class UnitWorker : MonoBehaviour
 {
-    public bool IsWork { get; private set; }
-    
     [SerializeField] private Builder _builder;
     
     private Citadel _citadel;
     private Vector3 _pathBuild;
     private Mover _mover;
     private Resource _resource;
+    public bool IsWork { get; private set; }
 
     public void DragResource(Resource target)
     {

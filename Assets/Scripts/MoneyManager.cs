@@ -2,33 +2,32 @@ using UnityEngine;
 
 public class MoneyManager : MonoBehaviour
 {
-    public static int s_Money { get; private set; }
-    public static int s_PriceCitadel { get; private set; } = 5;
-    private static int s_priceWorker = 2;
+    public static int Money { get; private set; }
+    public static int PriceCitadel { get; private set; } = 5;
+    private static int _priceWorker = 2;
 
     public static bool TryBuyWorker()
     {
-        return s_Money >= s_priceWorker;
+        return Money >= _priceWorker;
     }
 
     public static bool TryBuyCitadel()
     {
-        return s_Money >= s_PriceCitadel;
+        return Money >= PriceCitadel;
     }
 
     public void ReceiveMoney()
     {
-        s_Money++;
-        Debug.Log(s_Money);
+        Money++;
     }
 
     public void BuyWorker()
     {
-        s_Money -= s_priceWorker;
+        Money -= _priceWorker;
     }
 
     public void BuyCitadel()
     {
-        s_Money -= s_PriceCitadel;
+        Money -= PriceCitadel;
     }
 }
