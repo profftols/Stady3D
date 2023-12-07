@@ -4,8 +4,8 @@ public class PointBuild : MonoBehaviour
 {
     [SerializeField] private LayerMask _groundLayer;
     
-    private bool _isHighlighted;
     private PointBuild _point;
+    private bool _isHighlighted;
 
     private void Update()
     {

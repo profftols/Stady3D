@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class LoadingResource : MonoBehaviour
 {
-    public Vector3 position { get; private set; }
     private MoneyManager _manager;
 
     private void Start()
     {
-        position = transform.position;
         _manager = GetComponentInParent<MoneyManager>();
     }
 

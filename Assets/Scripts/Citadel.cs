@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Citadel : MonoBehaviour
 {
-    [SerializeField] private float _waiterBuy = 2f;
-    [SerializeField] private UnitWorker _unitWorker;
-    
     private static Queue<Resource> s_resources;
     private static Queue<UnitWorker> s_unitWorkers;
+    
+    [SerializeField] private float _waiterBuy = 2f;
+    [SerializeField] private UnitWorker _unitWorker;
     
     private Builder _builder;
 
@@ -25,24 +25,24 @@ public class Citadel : MonoBehaviour
 
     private static bool CheckFreeResource(Resource resource)
     {
-        if (resource.isWorkerBusy == false)
+        if (resource.IsWorkerBusy == false)
         {
             return CheckFreeWorker(resource);
         }
 
-        return resource.isWorkerBusy;
+        return resource.IsWorkerBusy;
     }
 
     private static bool CheckFreeWorker(Resource resource)
     {
         if (s_unitWorkers.TryPeek(out UnitWorker unitWorker))
         {
-            resource.isWorkerBusy = true;
+            resource.IsWorkerBusy = true;
             s_unitWorkers.Dequeue().DragResource(resource);
             return false;
         }
 
-        resource.isWorkerBusy = false;
+        resource.IsWorkerBusy = false;
         return true;
     }
 
@@ -89,7 +89,7 @@ public class Citadel : MonoBehaviour
         
         while (enabled)
         {
-            if (CameraClicker.s_flagBuild)
+            if (CameraClicker.s_FlagBuild)
             {
                 if (MoneyManager.TryBuyCitadel())
                 {
@@ -112,7 +112,7 @@ public class Citadel : MonoBehaviour
     {
         if (s_unitWorkers.TryDequeue(out UnitWorker unitWorker))
         {
-            unitWorker.BuildCitadel(CameraClicker.s_flagBuild.transform.position);
+            unitWorker.BuildCitadel(CameraClicker.s_FlagBuild.transform.position);
         }
     }
 

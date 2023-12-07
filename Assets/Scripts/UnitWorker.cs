@@ -4,7 +4,7 @@ public class UnitWorker : MonoBehaviour
 {
     [SerializeField] private Builder _builder;
     
-    public bool isWork { get; private set; }
+    public bool IsWork { get; private set; }
     private Citadel _citadel;
     private Vector3 _pathBuild;
     private Mover _mover;
@@ -13,7 +13,7 @@ public class UnitWorker : MonoBehaviour
     public void DragResource(Resource target)
     {
         _resource = target;
-        isWork = _mover.TrySetCoordinateResource(target.transform.position);
+        IsWork = _mover.TrySetCoordinateResource(target.transform.position);
     }
 
     public bool TryCheckResource(Resource resource)
@@ -23,17 +23,17 @@ public class UnitWorker : MonoBehaviour
 
     public void BuildCitadel(Vector3 target)
     {
-        isWork = _mover.TrySetCoordinateBuild(target);
+        IsWork = _mover.TrySetCoordinateBuild(target);
     }
 
     public bool Released()
     {
-        return isWork = _citadel.AddQueueWorker(this);
+        return IsWork = _citadel.AddQueueWorker(this);
     }
 
     public void SetPosition(Vector3 position)
     {
-        isWork = _mover.SetNewPosition(position);
+        IsWork = _mover.SetNewPosition(position);
     }
 
     private void OnTriggerEnter(Collider other)

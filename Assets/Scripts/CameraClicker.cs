@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class CameraClicker : MonoBehaviour
 {
+    public static PointBuild s_FlagBuild { get; private set; }
+    
     [SerializeField] private PointBuild pointBuild;
     [SerializeField] private LayerMask _groundLayer;
     
-    public static PointBuild s_flagBuild { get; private set; }
-    private bool _isHighlighted;
     private Citadel _citadel;
+    private bool _isHighlighted;
+    private float maxDistance = 100f;
     
     private void Update()
     {
@@ -19,7 +21,7 @@ public class CameraClicker : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 100))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, maxDistance))
             {
                 if (hit.collider.TryGetComponent<Citadel>(out Citadel citadel))
                 {
@@ -44,13 +46,13 @@ public class CameraClicker : MonoBehaviour
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 100,
                         _groundLayer))
                 {
-                    if (s_flagBuild != null)
+                    if (s_FlagBuild != null)
                     {
-                        s_flagBuild.transform.position = hit.point;
+                        s_FlagBuild.transform.position = hit.point;
                     }
                     else
                     {
-                        s_flagBuild = Instantiate(pointBuild, hit.point, Quaternion.identity);
+                        s_FlagBuild = Instantiate(pointBuild, hit.point, Quaternion.identity);
                     }
                 }
             }

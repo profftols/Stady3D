@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Mover : MonoBehaviour
@@ -47,7 +45,7 @@ public class Mover : MonoBehaviour
         {
             if (_isCollect)
             {
-                if (_shipper.isCargoFull == false)
+                if (_shipper.IsCargoFull == false)
                 {
                     GoTarget();
                 }
@@ -92,7 +90,7 @@ public class Mover : MonoBehaviour
 
         if (transform.position == _loadResource)
         {
-            if (_shipper.isCargoFull)
+            if (_shipper.IsCargoFull)
             {
                 _isCollect = _unit.Released();
                 _shipper.Unload();

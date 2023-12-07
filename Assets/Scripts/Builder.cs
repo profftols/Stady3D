@@ -14,7 +14,9 @@ public class Builder : MonoBehaviour
     
         public Citadel CreateCitadel(PointBuild point)
         {
-            var set = new Vector3(point.transform.position.x, point.transform.position.y + 0.01f,
+            float height = 0.01f;
+            
+            var set = new Vector3(point.transform.position.x, point.transform.position.y + height,
                 point.transform.position.z);
             
             _money.BuyCitadel();

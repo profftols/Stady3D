@@ -23,7 +23,7 @@ public class Scanner : MonoBehaviour
             {
                 for (int i = 0; i < resources.Length; i++)
                 {
-                    if (resources[i].isBusy == false && resources[i].isWorkerBusy == false)
+                    if (resources[i].IsBusy == false && resources[i].IsWorkerBusy == false)
                     {
                         Citadel.AddResource(ref resources[i]);
                     }
