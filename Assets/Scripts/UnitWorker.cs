@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Mover))]
 public class UnitWorker : MonoBehaviour
 {
     private Citadel _citadel;

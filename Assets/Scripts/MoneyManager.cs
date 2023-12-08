@@ -19,8 +19,6 @@ public class MoneyManager : MonoBehaviour
     public void ReceiveMoney()
     {
         Money++;
-
-        Debug.Log("Денег: " + Money + " Цена строителя: " + _priceWorker + " Цена цитадели: " + PriceCitadel);
     }
 
     public void BuyWorker()
