@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f75d0473ea1d2a469985a5f1d04d324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointBuild: {fileID: 6052625561585734477, guid: 621f876f5a1174a45b2e2d71b8d0be37, type: 3}
+  _pointBuild: {fileID: 6052625561585734477, guid: 621f876f5a1174a45b2e2d71b8d0be37, type: 3}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8

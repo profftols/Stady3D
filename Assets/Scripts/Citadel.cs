@@ -8,7 +8,6 @@ public class Citadel : MonoBehaviour
     private static Queue<Resource> _resources;
     private static Queue<UnitWorker> _unitWorkers;
     
-    [SerializeField] private float _waiterBuy = 2f;
     [SerializeField] private UnitWorker _unitWorker;
     
     private Builder _builder;
@@ -23,8 +22,6 @@ public class Citadel : MonoBehaviour
 
         for (int i = 0; i < workers.Length; i++)
             _unitWorkers.Enqueue(workers[i]);
-
-        StartCoroutine(BuyManager());
     }
 
     public static void AddResource(ref Resource resource)
@@ -67,49 +64,33 @@ public class Citadel : MonoBehaviour
         worker.SetPosition(transform.GetChild(1).position);
     }
 
-    public bool AddQueueWorker(UnitWorker worker)
+    public Vector3 GetLoadResource()
+    {
+        return transform.GetChild(0).position;
+    }
+
+    public void AddQueueWorker(UnitWorker worker)
     {
         _unitWorkers.Enqueue(worker);
+        worker.SetPosition(transform.GetChild(1).position);
 
         while (_resources.Count > 0)
         {
             CheckFreeResource(_resources.Dequeue());
         }
-        
-        return false;
     }
 
     public Citadel BuildBase(PointBuild point)
     {
         return _builder.CreateCitadel(point);
     }
-    
-    private IEnumerator BuyManager()
-    {
-        var waiteTimer = new WaitForSeconds(_waiterBuy);
-        
-        while (enabled)
-        {
-            if (CameraClicker.FlagBuild)
-            {
-                if (MoneyManager.TryBuyCitadel())
-                {
-                    CreateCitadel();
-                }
-            }
-            else
-            {
-                if (MoneyManager.TryBuyWorker())
-                {
-                    CreateUnit();
-                }
-            }
 
-            yield return waiteTimer;
-        }
+    public Vector3 UnitHome()
+    {
+        return transform.GetChild(1).position;
     }
 
-    private void CreateCitadel()
+    public void CreateCitadel()
     {
         if (_unitWorkers.TryDequeue(out UnitWorker unitWorker))
         {
@@ -117,7 +98,7 @@ public class Citadel : MonoBehaviour
         }
     }
 
-    private void CreateUnit()
+    public void CreateUnit()
     {
         UnitWorker unit = _builder.CreateUnit(transform.GetChild(1).position, _unitWorker);
         _unitWorkers.Enqueue(unit);

@@ -2,14 +2,38 @@ using UnityEngine;
 
 public class UnitWorker : MonoBehaviour
 {
-    [SerializeField] private Builder _builder;
-    
     private Citadel _citadel;
-    private Vector3 _pathBuild;
     private Mover _mover;
     private Resource _resource;
     public bool IsWork { get; private set; }
 
+    private void Awake()
+    {
+        _mover = GetComponent<Mover>();
+        _citadel = FindAnyObjectByType<Citadel>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out PointBuild point))
+        {
+            if (MoneyManager.TryBuyCitadel())
+            {
+                _citadel.BuildBase(point).AddUnitWorker(this);
+            }
+        }
+
+        if (other.TryGetComponent(out LoadingResource load))
+        {
+            load.SetWorkerHome(this);
+        }
+    }
+
+    public Vector3 SetHome()
+    {
+        return _citadel.UnitHome();
+    }
+    
     public void DragResource(Resource target)
     {
         _resource = target;
@@ -26,30 +50,13 @@ public class UnitWorker : MonoBehaviour
         IsWork = _mover.TrySetCoordinateBuild(target);
     }
 
-    public bool Released()
-    {
-        return IsWork = _citadel.AddQueueWorker(this);
-    }
-
     public void SetPosition(Vector3 position)
     {
-        IsWork = _mover.SetNewPosition(position);
+        IsWork = _mover.SetHome(position);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public Vector3 GetLoad()
     {
-        if (other.TryGetComponent(out PointBuild point))
-        {
-            if (MoneyManager.TryBuyCitadel())
-            {
-                _citadel.BuildBase(point).AddUnitWorker(this);
-            }
-        }
-    }
-
-    private void Start()
-    {
-        _mover = GetComponent<Mover>();
-        _citadel = FindAnyObjectByType<Citadel>();
+        return _citadel.GetLoadResource();
     }
 }

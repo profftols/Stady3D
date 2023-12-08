@@ -3,11 +3,12 @@ using UnityEngine;
 public class Shipper : MonoBehaviour
 {
     private UnitWorker _unit;
-    public bool IsCargoFull { get; private set; }
+    private Mover _mover;
     
     private void Start()
     {
         _unit = GetComponentInParent<UnitWorker>();
+        _mover = GetComponentInParent<Mover>();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -18,15 +19,8 @@ public class Shipper : MonoBehaviour
             {
                 resource.transform.SetParent(transform);
                 resource.transform.position = transform.position;
-                IsCargoFull = true;
-                resource.IsBusy = true;
+                resource.IsBusy = _mover.SetTargetLoad();
             }
         }
     }
-
-    public void Unload()
-    {
-        IsCargoFull = false;
-    }
-
 }

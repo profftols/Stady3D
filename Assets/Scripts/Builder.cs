@@ -32,5 +32,4 @@ public class Builder : MonoBehaviour
             Destroy(point.gameObject);
             return citadel;
         }
-    
 }
